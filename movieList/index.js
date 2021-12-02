@@ -1,3 +1,17 @@
+require('dotenv').config();
+const express = require('express');
+const app = express();
+
+const path = require('path');
+
+var Rollbar = require('rollbar')
+
+var rollbar = new Rollbar({
+
+})
+
+app.use(express.json());
+
 document.querySelector("form").addEventListener("submit", addMovie);
 const message = document.querySelector('#message')
 
@@ -53,3 +67,9 @@ function revealMessage() {
         message.classList.add('hide')
     }, 1000)
 }
+
+rollbar.log('Server started');
+
+const port = process.env.PORT || 5050
+
+app.listen(port, () => console.log(`Server running on ${port}`))
